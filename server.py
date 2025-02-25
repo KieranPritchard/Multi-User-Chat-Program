@@ -1,4 +1,5 @@
 import socket
+import threading
 
 # Server configuration
 HOST = '127.0.0.1'
@@ -26,3 +27,7 @@ def start_server():
     while True:
         client_socket, addr = server_socket.accept()
         clients.append(client_socket)
+
+        # Starts a new thread to stop any blocking
+        client_thread = threading.Thread(target=handle_client, args=(client_socket))
+        client_thread.start()
