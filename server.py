@@ -8,6 +8,14 @@ server_config = ((HOST, PORT))
 # Keeps a list of all the connected clients
 clients = []
 
+#Function to handle and broadcast messages
+def handle_client(client_socket):
+    while True:
+        received_message = client_socket.recv(1024).decode()
+        if received_message:
+            for client in clients:
+                client.send(received_message.encode())
+
 #Function to start server
 def start_server():
     server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
