@@ -7,10 +7,9 @@ server_address_information = (HOST, PORT)
 
 # This creates the client socket
 client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-client_socket.bind(server_address_information)
 
 try:
-    client_socket.connect()
+    client_socket.connect(server_address_information)
 
     while True:
         # This takes in user input then formats and checks it for the quit message
