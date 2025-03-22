@@ -15,7 +15,10 @@ def handle_client(client_socket):
         received_message = client_socket.recv(1024).decode()
         if received_message:
             for client in clients:
-                client.send(received_message.encode())
+                if HOST != client:
+                    client.send(received_message.encode())
+                else:
+                    continue
 
 #Function to start server
 def start_server():
