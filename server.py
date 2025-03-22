@@ -11,14 +11,19 @@ clients = []
 
 #Function to handle and broadcast messages
 def handle_client(client_socket):
-    while True:
-        received_message = client_socket.recv(1024).decode()
-        if received_message:
-            for client in clients:
-                if HOST != client:
-                    client.send(received_message.encode())
-                else:
-                    continue
+    try:
+        while True:
+            received_message = client_socket.recv(1024).decode()
+            if received_message:
+                for client in clients:
+                    if client != client_socket:
+                        client.send(received_message.encode())
+    except Exception as e:
+        print(f"Error Encountered: {e}")
+    finally:
+        print("Client Disconnected.")
+        clients.remove(client_socket)
+        client_socket.close()
 
 #Function to start server
 def start_server():
