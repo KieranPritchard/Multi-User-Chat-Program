@@ -39,3 +39,6 @@ def start_server():
         # Starts a new thread to stop any blocking
         client_thread = threading.Thread(target=handle_client, args=(client_socket, ))
         client_thread.start()
+
+if __name__ == "__main__":
+    start_server()
