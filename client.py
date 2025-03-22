@@ -10,6 +10,7 @@ client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
 try:
     client_socket.connect(server_address_information)
+    print("Connected to the server. Type 'quit' to exit.")
 
     while True:
         # This takes in user input then formats and checks it for the quit message
